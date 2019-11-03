@@ -33,4 +33,4 @@ setInterval(function(){
 			break;
 	}
 	i++;
-}, 500);
+}, 200);
