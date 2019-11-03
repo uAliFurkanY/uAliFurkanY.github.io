@@ -1,4 +1,3 @@
-let title = document.title;
 let i = 1;
 
 setInterval(function(){
@@ -6,31 +5,31 @@ setInterval(function(){
 	switch(i%9)
 	{
 		case 1:
-			title = " Welcome!";
+			document.title = " Welcome!";
 			break;
 		case 2:
-			title = "! Welcome";
+			document.title = "! Welcome";
 			break;
 		case 3:
-			title = "e! Welcom";
+			document.title = "e! Welcom";
 			break;
 		case 4:
-			title = "me! Welco";
+			document.title = "me! Welco";
 			break;
 		case 5:
-			title = "ome! Welc";
+			document.title = "ome! Welc";
 			break;
 		case 6:
-			title = "come! Wel";
+			document.title = "come! Wel";
 			break;
 		case 7:
-			title = "lcome! Wel";
+			document.title = "lcome! Wel";
 			break;
 		case 8:
-			title = "elcome! W";
+			document.title = "elcome! W";
 			break;
 		case 0:
-			title = " Welcome!";
+			document.title = " Welcome!";
 			break;
 	}
 	i++;
