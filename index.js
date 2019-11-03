@@ -1,7 +1,7 @@
 let i = 1;
-
-setInterval(function(){
-// "Welcome! " -> 9
+setInterval(
+function()
+{
 	switch(i%9)
 	{
 		case 1:
@@ -33,4 +33,5 @@ setInterval(function(){
 			break;
 	}
 	i++;
-}, 200);
+},
+200);
