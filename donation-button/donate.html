@@ -20,37 +20,131 @@
 			.c4.darkmode {
 				color: #23272a;
 			}
-			.c3.lightmode {
-				color: #7289da;
-			}
-			.c4.lightmode {
-				color: #ffffff;
+
+			body.lightmode {
+				background-color: #fff5ee;
 			}
 			.c1.lightmode {
-				color: #99aab5;
+				color: #6e7f80;
 			}
-			.c2.darkmode {
-				color: #23272a;
+			.c2.lightmode {
+				color: #536872;
+			}
+			.c3.lightmode {
+				color: #708090;
+			}
+			.c4.lightmode {
+				color: #36454f;
 			}
 			.link {
-				color: #7289da;
+				color: #7289da !important;
 			}
 			.link:hover {
-				color: #667BC4;
+				color: #667BC4 !important;
+				opacity: 0.9 !important;
+			}
+			a.link:visited {
+				color: #667BC4 !important;
 				opacity: 0.9;
 			}
-			body.lightmode {
-				background-color: #2c2f33;
-			}
+
 			.verdana {
 				font-family: Verdana, Times, sans-serif;
 			}
 			.arial {
 				font-family: Arial, Times, sans-serif;
 			}
+			.donation {
+				margin: 5px;
+				border: 1px solid #888888;
+				padding: 15px;
+				height: 120px;
+			}
+			.container {
+				width: 420px;
+				padding: 10px;
+				border: 1px solid #777777;
+				margin: auto;
+			}
 		</style>
 		<body>
-			<script>//document.body.class = "darkmode";</script>
+			<div class="verdana container" style="height: 140px;">
+				<a style="font-size: x-large;" class="c1">Donate to </a>
+				<a id="receiverName" class="c2 arial" style="font-size: xx-large;"></a>
+				<a style="padding-left: 8em; font-size: small;" class="link" href="javascript:changeTheme();">Change Theme</a><br>
+				<a class="c3 arial" id="extraDesc"></a><br><br>
+			</div>
+			<script>
+				function themeSwitch(to, from)
+				{
+					let all;
+					to = to.trim();
+					if(from == undefined)
+					{
+						all = $("*").toArray();
+					}
+					else
+					{
+						from = from.trim();
+						all = $("." + from).toArray();
+					}
+					if(all.length > 0)
+					{
+						all.forEach(x => {
+							try { x.classList.toggle(from, false); } catch {}
+							x.classList.toggle(to, true);
+						});
+					}
+					else
+					{
+						throw new Error("Empty from selector");
+					}
+				}
+
+				let donation = JSON.parse(atob(location.hash.substr(1)).trim());
+				
+				$("#receiverName")[0].innerHTML = donation.receiverName;
+				$("#extraDesc")[0].innerHTML = donation.description;
+
+				let container = $(".container")[0];
+				donation.means.forEach((x, i) => {
+					let div = document.createElement("div");
+					div.className = "donation verdana";
+					let a1 = document.createElement("a");
+					a1.className = "link";
+					a1.setAttribute("href", x.link);
+					a1.setAttribute("target", "_blank");
+					let h3 = document.createElement("h3");
+					h3.innerHTML = "Donate via " + x.name;
+					let br = document.createElement("br");
+					let a2 = document.createElement("a");
+					a2.className = "c1 arial";
+					a2.innerHTML = "Address: " + x.address;
+					a1.appendChild(h3);
+					div.appendChild(a1);
+					div.appendChild(br);
+					div.appendChild(a2);
+					container.appendChild(div);
+					container.style.height = (parseInt(container.style.height) + 130).toString(); + "px";
+				});
+
+				themeSwitch("darkmode");
+				let currentTheme = "darkmode";
+
+				function changeTheme()
+				{
+					if (currentTheme == "darkmode")
+					{
+						themeSwitch("lightmode", "darkmode");
+						currentTheme = "lightmode";
+					}
+					else
+					{
+						themeSwitch("darkmode", "lightmode");
+						currentTheme = "darkmode";
+					}
+				}
+			</script>
 		</body>
 	</head>
 </html>
