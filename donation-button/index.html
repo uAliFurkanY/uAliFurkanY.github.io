@@ -1,16 +1,94 @@
 <html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="styles.css">
-		<link rel="stylesheet" href="discord-theme.css">
-		<title>Donation Button Generator</title>
-	</head>
-	<body>
-		<center>
-			<h1 class="blue">Donation Button Generator</h1>
-			<a href="http://alifurkany.ml" class="link" target="_blank">
-				<h3>Made by Ali Furkan YILDIZ</h3>
-			</a>
-		</center>
-	</body>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="discord-theme.css">
+	<title>Donation Button Generator</title>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/mode-json.js"></script>
+	<style>
+		#editor {
+			position: absolute;
+			width: 500px;
+			height: 400px;
+		}
+	</style>
+</head>
+
+<body class="verdana">
+	<center>
+		<h1 class="blue">Donation Button Generator</h1>
+		<a href="http://alifurkany.ml" class="link arial" target="_blank">
+			<h3>Made by Ali Furkan YILDIZ</h3>
+		</a>
+		<h4 class="light">Build JSON</h4>
+		<div id="editor"></div>
+		<br>
+		<h3 class="white">HTML Embed Code: </h3>
+		<textarea readonly fill-vars style="height: 150px; width: 300px;">{{iframe_code}}</textarea>
+		<br>
+		<button onclick="copyLink();">Copy Link</button>
+		<script>
+			function fillVars(varlist, eSelector, rSelector) {
+				String.prototype.sliceToMiddle = function (x) {
+					return this.substr(x, this.length - (2 * x));
+				};
+				String.prototype.replaceAll = function (r, t) {
+					return this.replace(new RegExp(r, "g"), t)
+				};
+				varlist = varlist || {};
+				eSelector = eSelector || "[fill-vars]";
+				rSelector = rSelector || /{{[a-zA-Z_$][a-zA-Z_$0-9]*}}/g;
+
+				document.querySelectorAll(eSelector).forEach(x => {
+					x.innerHTML.match(rSelector).forEach(y => {
+						let val;
+						try { val = eval("varlist." + (y.sliceToMiddle(2))); } catch { }
+						if (typeof val != "undefined") {
+							x.innerHTML = x.innerHTML.replaceAll(y, val);
+						}
+					});
+				});
+			}
+
+			let editordiv = $("#editor")[0];
+			let editor = ace.edit("editor");
+			editor.session.setMode("ace/mode/json");
+			editor.setValue(`{
+	"receiverName": "Receiver's Name",
+	"description": "Test Description",
+	"means": [
+		{
+			"name": "PayPal",
+			"description": "Test Description",
+			"link": "http://example.com/foo",
+			"address": "johndoe@example.com"
+		},
+		{
+			"name": "Bitcoin",
+			"description": "Test Description",
+			"link": "http://example.com/bar",
+			"address": "johndoe@example.com"
+		},
+		{
+			"name": "Patreon",
+			"description": "Test Description",
+			"link": "http://example.com/baz",
+			"address": "/JohnDoe"
+		}
+	]
+}`);
+
+			setInterval(()=>{
+				let hash = btoa(editor.getValue().trim());
+				let height = (JSON.parse(editor.getValue().trim()).means.length + 1) * 140;
+				let embedcode = `<iframe src="http://uAliFurkanY.github.io/donation-button/donate.html#` + hash + `" scrolling="no" style="width:420px;height:` + height +`px;border:0;padding:0;overflow:hidden;"></iframe>`;
+				fillVars({hash: hash, iframe_code: embedcode});
+			}, 25);
+		</script>
+	</center>
+</body>
+
 </html>
