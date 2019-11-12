@@ -10,26 +10,24 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/mode-json.js"></script>
 	<style>
 		#editor {
-			position: absolute;
+			position: relative;
 			width: 500px;
-			height: 400px;
+			height: 275px;
 		}
 	</style>
 </head>
 
 <body class="verdana">
 	<center>
-		<h1 class="blue">Donation Button Generator</h1>
+		<h1 class="white">Donation Button Generator</h1>
 		<a href="http://alifurkany.ml" class="link arial" target="_blank">
-			<h3>Made by Ali Furkan YILDIZ</h3>
+			<h4>Made by Ali Furkan YILDIZ</h3>
 		</a>
-		<h4 class="light">Build JSON</h4>
 		<div id="editor"></div>
+		<h3 class="light">HTML Embed Code: </h3>
+		<textarea readonly fill-vars style="height: 100px; width: 300px;">{{iframe_code}}</textarea>
 		<br>
-		<h3 class="white">HTML Embed Code: </h3>
-		<textarea readonly fill-vars style="height: 150px; width: 300px;">{{iframe_code}}</textarea>
-		<br>
-		<button onclick="copyLink();">Copy Link</button>
+		<button onclick="copyCode();">Copy Code</button>
 		<script>
 			function fillVars(varlist, eSelector, rSelector) {
 				String.prototype.sliceToMiddle = function (x) {
@@ -71,16 +69,19 @@
 			"description": "Test Description",
 			"link": "http://example.com/bar",
 			"address": "johndoe@example.com"
-		},
-		{
-			"name": "Patreon",
-			"description": "Test Description",
-			"link": "http://example.com/baz",
-			"address": "/JohnDoe"
 		}
 	]
 }`);
-
+			function copyCode() {
+				let textarea = $("textarea[readonly][fill-vars]")[0];
+				let button = $('button[onclick="copyCode();"]')[0];
+				textarea.select();
+				document.execCommand("copy");
+				button.innerHTML = "Copied";
+				setInterval(()=>{
+					button.innerHTML = "Copy Code";
+				}, 1500);
+			}
 			setInterval(()=>{
 				let hash = btoa(editor.getValue().trim());
 				let height = (JSON.parse(editor.getValue().trim()).means.length + 1) * 140 + 30;
