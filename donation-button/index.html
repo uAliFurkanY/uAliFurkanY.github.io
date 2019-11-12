@@ -84,7 +84,7 @@
 			setInterval(()=>{
 				let hash = btoa(editor.getValue().trim());
 				let height = (JSON.parse(editor.getValue().trim()).means.length + 1) * 140;
-				let embedcode = `<iframe src="http://uAliFurkanY.github.io/donation-button/donate.html#` + hash + `" scrolling="no" style="width:420px;height:` + height +`px;border:0;padding:0;overflow:hidden;"></iframe>`;
+				let embedcode = `<iframe src="http://uAliFurkanY.github.io/donation-button/donate.html#` + hash + `" scrolling="no" style="width:450px;height:` + height + `px;border:0;padding:0;overflow:hidden;"></iframe>`;
 				fillVars({hash: hash, iframe_code: embedcode});
 			}, 25);
 		</script>

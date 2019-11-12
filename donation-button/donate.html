@@ -58,7 +58,7 @@
 				margin: 5px;
 				border: 1px solid #888888;
 				padding: 15px;
-				height: 130px;
+				height: 108px;
 			}
 			.container {
 				width: 420px;
@@ -107,7 +107,7 @@
 			document.title = "Donate to " + donation.receiverName;
 			$("#extraDesc")[0].innerHTML = donation.description;
 			let container = $(".container")[0];
-			donation.means.forEach((x, i) => {
+			donation.means.forEach(x => {
 				let div = document.createElement("div");
 				div.className = "donation verdana";
 				let a1 = document.createElement("a");
