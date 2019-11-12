@@ -27,7 +27,7 @@
 		<h3 class="light">HTML Embed Code: </h3>
 		<textarea readonly fill-vars style="height: 100px; width: 300px;"></textarea>
 		<br>
-		<button onclick="copyCode();">Copy Code</button>
+		<button onclick="copyCode();">Copy Code</button> <button onclick="copyLink();">Copy Link</button>
 		<script>
 			function fillVars(varlist, eSelector, rSelector) {
 				String.prototype.sliceToMiddle = function (x) {
@@ -83,9 +83,23 @@
 					button.innerHTML = "Copy Code";
 				}, 1500);
 			}
+			function copyLink() {
+				let button = $('button[onclick="copyLink();"]')[0];
+				let content = document.createElement("a");
 
+				content.innerHTML = "http://uAliFurkanY.github.io/donation-button/donate.html#" + hash;
+				
+				content.select();
+				document.execCommand("copy");
+				button.innerHTML = "Copied";
+				setInterval(()=>{
+					button.innerHTML = "Copy Link";
+				}, 1500);
+			}
+
+			let hash;
 			setInterval(()=>{
-				let hash = btoa(editor.getValue().trim());
+				hash = btoa(editor.getValue().trim());
 				let height = (JSON.parse(editor.getValue().trim()).means.length + 1) * 140 + 30;
 				let embedcode = `<iframe src="http://uAliFurkanY.github.io/donation-button/donate.html#` + hash + `" scrolling="no" style="width:450px;height:` + height + `px;border:0;padding:0;overflow:hidden;"></iframe>`;
 				textarea.innerHTML = embedcode;
