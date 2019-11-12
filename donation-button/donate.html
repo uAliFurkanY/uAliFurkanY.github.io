@@ -71,8 +71,8 @@
 	<body>
 		<div class="verdana container" style="height: 140px;">
 			<a style="font-size: x-large;" class="c1">Donate to </a>
-			<a id="receiverName" class="c2 arial" style="font-size: xx-large;"></a>
-			<a style="padding-left: 8em; font-size: small;" class="link" href="javascript:changeTheme();">Change Theme</a><br>
+			<a id="receiverName" class="c2 arial" style="font-size: xx-large;"></a><br>
+			<a style="font-size: small;" class="link" href="javascript:changeTheme();">Change Theme</a><br>
 			<a class="c3 arial" id="extraDesc"></a><br><br>
 		</div>
 		<script>
@@ -131,7 +131,7 @@
 				div.appendChild(br2);
 				div.appendChild(a3);
 				container.appendChild(div);
-				container.style.height = (parseInt(container.style.height) + 140).toString(); + "px";
+				container.style.height = (parseInt(container.style.height) + 140).toString(); + "px !important";
 			});
 			let a = document.createElement("a");
 			a.className = "link";
