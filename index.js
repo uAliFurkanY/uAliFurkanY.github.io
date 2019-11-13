@@ -1,9 +1,21 @@
+let vars = {
+	link1: "http://uAliFurkanY.github.io/",
+	link2: "http://github.com/uAliFurkanY/uAliFurkanY.github.io/",
+	link3: "http://ebtc.ml",
+	link4: "http://github.com/uAliFurkanY/urlshortener/",
+	link5: "http://colorbrightness.ml/",
+	link6: "http://github.com/uAliFurkanY/colorbrightness/",
+	link7: "http://uAliFurkanY.github.io/donation-button/",
+	link8: "http://github.com/uAliFurkanY/uAliFurkanY.github.io/tree/master/donation-button/",
+	link9: "http://alifurkany.ml/"
+};
+
+let fill_vars = new fillVars(vars);
+fill_vars.fill();
+
 let i = 1;
-setInterval(
-function()
-{
-	switch(i%9)
-	{
+setInterval(function () {
+	switch (i % 9) {
 		case 1:
 			document.title = " Welcome!";
 			break;
@@ -33,5 +45,4 @@ function()
 			break;
 	}
 	i++;
-},
-200);
+}, 200);
