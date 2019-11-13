@@ -1,111 +1,125 @@
 <html>
+  <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="styles.css">
+      <link rel="stylesheet" href="discord-theme.css">
+      <title>Donation Button Generator</title>
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/mode-json.js"></script>
+      <style>
+          #editor {
+              position: relative;
+              width: 500px;
+              height: 275px;
+          }
+      </style>
+  </head>
+  <body class="verdana">
+      <center>
+          <h1 class="white">Donation Button Generator</h1>
+          <a href="http://alifurkany.ml" class="link arial" target="_blank">
+              <h4>Made by Ali Furkan YILDIZ</h4>
+          </a>
+          <div id="editor"></div>
+          <h3 class="light">HTML Embed Code: </h3>
+          <textarea readonly fill-vars style="height: 100px; width: 300px;">{{embed}}</textarea>
+          <br>
+          <button onclick="copyCode();">Copy Code</button> <button onclick="copyLink();">Copy Link</button>
+          <script>
+              function fillVarsDynamic(vars, cssSelector, regex) {
+                  String.prototype.replaceAll = function (r, t) {
+                      return this.replace(new RegExp(r, "g"), t)
+                  };
+                  this.varlist = vars || {};
+                  this.eSelector = cssSelector || "[fill-vars]";
+                  this.rSelector = regex || /{{[a-zA-Z_$][a-zA-Z_$0-9]*}}/g;
+                  let elements = [];
+                  this.fill = () => {
+                      if(elements.length == 0)
+                      {
+                          this.scan();
+                          return this.fill();
+                      }
+                      return setInterval(() => {
+                          elements.forEach(x => {
+                              x.origText.match(this.rSelector).forEach(y => {
+                                  let val;
+                                  try { val = eval("this.varlist." + (y.slice(2, -2))); } catch { }
+                                  if (typeof val != "undefined") {
+                                      x.element.innerHTML = x.origText.replaceAll(y, val);
+                                  }
+                              });
+                          });
+                      }, 100);
+                  }
+                  this.scan = () => {
+                      elements = [];
+                      document.querySelectorAll(this.eSelector).forEach(x => {
+                          elements.push({ element: x, origText: x.innerHTML });
+                      });
+                  }
+              }
 
-<head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" href="discord-theme.css">
-	<title>Donation Button Generator</title>
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/ace.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.6/mode-json.js"></script>
-	<style>
-		#editor {
-			position: relative;
-			width: 500px;
-			height: 275px;
-		}
-	</style>
-</head>
+              let editordiv = $("#editor")[0];
+              let editor = ace.edit("editor");
+              editor.session.setMode("ace/mode/json");
+              editor.setValue(`{
+      "receiverName": "Receiver's Name",
+      "description": "Test Description",
+      "means": [
+          {
+              "name": "PayPal",
+              "description": "Test Description",
+              "link": "http://example.com/foo",
+              "address": "johndoe@example.com"
+          },
+          {
+              "name": "Bitcoin",
+              "description": "Test Description",
+              "link": "http://example.com/bar",
+              "address": "johndoe@example.com"
+          }
+      ]
+  }`);
 
-<body class="verdana">
-	<center>
-		<h1 class="white">Donation Button Generator</h1>
-		<a href="http://alifurkany.ml" class="link arial" target="_blank">
-			<h4>Made by Ali Furkan YILDIZ</h3>
-		</a>
-		<div id="editor"></div>
-		<h3 class="light">HTML Embed Code: </h3>
-		<textarea readonly fill-vars style="height: 100px; width: 300px;"></textarea>
-		<br>
-		<button onclick="copyCode();">Copy Code</button> <button onclick="copyLink();">Copy Link</button>
-		<script>
-			function fillVars(varlist, eSelector, rSelector) {
-				String.prototype.sliceToMiddle = function (x) {
-					return this.substr(x, this.length - (2 * x));
-				};
-				String.prototype.replaceAll = function (r, t) {
-					return this.replace(new RegExp(r, "g"), t)
-				};
-				varlist = varlist || {};
-				eSelector = eSelector || "[fill-vars]";
-				rSelector = rSelector || /{{[a-zA-Z_$][a-zA-Z_$0-9]*}}/g;
+              let textarea = $("textarea[readonly][fill-vars]")[0];
+              function copyCode() {
+                  let button = $('button[onclick="copyCode();"]')[0];
+                  textarea.select();
+                  document.execCommand("copy");
+                  button.innerHTML = "Copied";
+                  setTimeout(() => {
+                      button.innerHTML = "Copy Code";
+                  }, 1500);
+              }
+              function copyLink() {
+                  let button = $('button[onclick="copyLink();"]')[0];
+                  let linkContent = document.createElement("textarea");
+                  linkContent.style.height = "0px";
+                  linkContent.style.width = "0px";
+                  linkContent.style.display = "block";
+                  linkContent.innerHTML = "http://uAliFurkanY.github.io/donation-button/donate.html#" + hash;
+                  document.body.appendChild(linkContent);
+                  linkContent.select();
+                  document.execCommand("copy");
+                  linkContent.remove();
+                  button.innerHTML = "Copied";
+                  setTimeout(() => {
+                      button.innerHTML = "Copy Link";
+                  }, 1500);
+              }
 
-				document.querySelectorAll(eSelector).forEach(x => {
-					x.innerHTML.match(rSelector).forEach(y => {
-						let val;
-						try { val = eval("varlist." + (y.sliceToMiddle(2))); } catch { }
-						if (typeof val != "undefined") {
-							x.innerHTML = x.innerHTML.replaceAll(y, val);
-						}
-					});
-				});
-			}
-
-			let editordiv = $("#editor")[0];
-			let editor = ace.edit("editor");
-			editor.session.setMode("ace/mode/json");
-			editor.setValue(`{
-	"receiverName": "Receiver's Name",
-	"description": "Test Description",
-	"means": [
-		{
-			"name": "PayPal",
-			"description": "Test Description",
-			"link": "http://example.com/foo",
-			"address": "johndoe@example.com"
-		},
-		{
-			"name": "Bitcoin",
-			"description": "Test Description",
-			"link": "http://example.com/bar",
-			"address": "johndoe@example.com"
-		}
-	]
-}`);
-
-			let textarea = $("textarea[readonly][fill-vars]")[0];
-			function copyCode() {
-				let button = $('button[onclick="copyCode();"]')[0];
-				textarea.select();
-				document.execCommand("copy");
-				button.innerHTML = "Copied";
-				setInterval(()=>{
-					button.innerHTML = "Copy Code";
-				}, 1500);
-			}
-			function copyLink() {
-				let button = $('button[onclick="copyLink();"]')[0];
-				let content = document.createElement("a");
-
-				content.innerHTML = "http://uAliFurkanY.github.io/donation-button/donate.html#" + hash;
-				
-				content.select();
-				document.execCommand("copy");
-				button.innerHTML = "Copied";
-				setInterval(()=>{
-					button.innerHTML = "Copy Link";
-				}, 1500);
-			}
-
-			let hash;
-			setInterval(()=>{
-				hash = btoa(editor.getValue().trim());
-				let height = (JSON.parse(editor.getValue().trim()).means.length + 1) * 140 + 30;
-				let embedcode = `<iframe src="http://uAliFurkanY.github.io/donation-button/donate.html#` + hash + `" scrolling="no" style="width:450px;height:` + height + `px;border:0;padding:0;overflow:hidden;"></iframe>`;
-				textarea.innerHTML = embedcode;
-			}, 25);
-		</script>
-	</center>
-</body>
-
+              let hash;
+              let iframefiller = new fillVarsDynamic();
+              setInterval(() => {
+                  hash = btoa(editor.getValue().trim());
+                  let height = (JSON.parse(editor.getValue().trim()).means.length + 1) * 140 + 30;
+                  let embedcode = `<iframe src="http://uAliFurkanY.github.io/donation-button/donate.html#` + hash + `" scrolling="no" style="width:450px;height:` + height + `px;border:0;padding:0;overflow:hidden;"></iframe>`;
+                  iframefiller.varlist.embed = embedcode;
+              }, 25);
+              iframefiller.fill();
+          </script>
+      </center>
+  </body>
 </html>

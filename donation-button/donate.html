@@ -115,7 +115,7 @@
 					throw new Error("Empty from selector");
 				}
 			}
-				let donation = JSON.parse(atob(location.hash.substr(1)).trim());
+			let donation = JSON.parse(atob(location.hash.substr(1)).trim());
 			
 			let fit = [];
 			$("#receiverName")[0].innerHTML = donation.receiverName;
