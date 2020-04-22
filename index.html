@@ -1,57 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<title>Welcome!</title>
-	<link rel="stylesheet" href="styles.css">
-	<link rel="stylesheet" href="discord-theme.css">
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/4fc6dbbc6d.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+	<script src="script.js" defer></script>
+	<title>Ali Furkan YILDIZ</title>
 </head>
 
-<body class="verdana">
-	<div style="width: 60%; margin: auto; padding: 20px; border: 2px solid white;">
-		<center>
-			<h1 class="blue">Welcome to my Github Pages site.</h1>
-		</center>
-		<h3 class="light">Hello, I am Ali Furkan YILDIZ and here, you can find my projects.</h3>
-		<ul class="white arial" fill-vars>
-			<li>This Website
-				<a class="link" href="http://uAliFurkanY.github.io/" target="_blank">Live</a>
-				<a class="link" href="http://github.com/uAliFurkanY/uAliFurkanY.github.io/" target="_blank">Source</a>
-			</li>
-			<li>URL Shortener
-				<a class="link" href="http://ebtc.ml" target="_blank">Live</a>
-				<a class="link" href="http://github.com/uAliFurkanY/urlshortener/" target="_blank">Source</a>
-			</li>
-			<li>Color Brightness AI
-				<a class="link" href="http://colorbrightness.ml/" target="_blank">Live</a>
-				<a class="link" href="http://github.com/uAliFurkanY/colorbrightness/" target="_blank">Source</a>
-			</li>
-			<li>Donation Button
-				<a class="link" href="http://uAliFurkanY.github.io/donation-button/" target="_blank">Live</a>
-				<a class="link" href="http://github.com/uAliFurkanY/uAliFurkanY.github.io/tree/master/donation-button/" target="_blank">Source</a>
-			</li>
-			<li>My Wordpress Blog
-				<a class="link" href="http://alifurkany.ml/" target="_blank">Link</a>
-			</li>
-			<li>Various Scripts
-				<a class="link" href="http://github.com/uAliFurkanY/scripts/" target="_blank">Source</a>
-			</li>
-			<li>Terraria Mobile Server Decompiled
-				<a class="link" href="http://github.com/uAliFurkanY/Terraria-Mobile-Server-Decompiled/" target="_blank">Source</a>
-			</li>
-			<!--
-			<li>Name 
-				<a class="link" href="Link1" target="_blank">Live</a> 
-				<a class="link" href="Link2" target="_blank">Source</a>
-			</li>
-			-->
-		</ul>
-		<a href="javascript:showIFrame();" class="link">
-			<h5 class="blue arial">Also, you can consider donating.</h5>
-		</a>
+<body>
+	<div id="root" class="text-primary p-4 mx-auto" style="width: 80%;">
+		<h1>Welcome</h1>
+		<h3 class="text-secondary">Hello, I am Ali Furkan YILDIZ, and this is my Github Pages site.</h3>
+		<h5 class="text-info" style="margin-bottom: 1em;">Here is the status of my home server,</h5>
+		<div id="status-div-head" class="mx-auto col-8 status-div-head text-dark border border-primary p-2"
+			style="display: none;">
+			<div class="col-6"><i class="fas fa-server text-primary"></i>
+				<h5 class="d-inline"> Server Status: </h5><i class="fas" id="server-status"></i>
+			</div>
+			<div class="col-6"><i class="fas fa-server text-primary"></i>
+				<h5 class="d-inline"> Server Name: </h5><a class="text-warning" id="server-name"></a>
+			</div>
+			<div class="col-6"><i class="fab fa-php text-primary"></i>
+				<h5 class="d-inline"> PHP Version: </h5><a class="text-warning" id="php-version"></a>
+			</div>
+			<div class="col-6"><i class="fas fa-database text-primary"></i>
+				<h5 class="d-inline"> Database Status: </h5><i class="fas" id="database-status"></i>
+			</div>
+			<div class="col-6"><i class="fas fa-database text-primary"></i>
+				<h5 class="d-inline"> Database Name: </h5><a class="text-warning" id="database-name"></a>
+			</div>
+			<div class="col-6"><i class="fas fa-database text-primary"></i>
+				<h5 class="d-inline"> Database Version: </h5><a class="text-warning" id="database-version"></a>
+			</div>
+		</div>
 	</div>
-	<script src="index.js"></script>
 </body>
 
 </html>
