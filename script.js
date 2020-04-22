@@ -7,7 +7,7 @@ function set_status(query = "", status = true) {
 
 async function loadStatus() {
 	try {
-		let answer = await $.ajax("http://afy.ddns.net/status.php");
+		let answer = await $.ajax("https://afy.ddns.net/status.php");
 		set_status("i#server-status", true);
 		if (answer.database_status === "up") {
 			set_status("i#database-status", true);
