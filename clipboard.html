@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>clipboard.js</title>
+	<script src="/scripts/clipboard.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+
+<body class="bg-dark">
+	<div class="mx-auto mt-2 border rounded border-white p-3 shadow-lg text-light" style="width: 75%;">
+		<h1 class="text-success ml-1 font-weight-bold d-inline">clipboard.js</h1>
+		<sub class="text-white">everything clipboard in one script.</sub>
+		<br>
+		<br>
+		<h5>1: Include the code</h5>
+		<textarea readonly style="width: 100%; height: 2.1em;"
+			class="mx-auto bg-dark text-light border border-primary rounded p-1" id="code1">
+&lt;script src="https://uAliFurkanY.github.io/scripts/clipboard.min.js"&gt;&lt;/script&gt;</textarea>
+		<br>
+		<button class="btn btn-success btn-sm" onclick="copy1.copy()">Copy</button>&nbsp;
+		<button class="btn btn-info btn-sm" onclick="copy1.select()">Select All</button>&nbsp;
+		<button class="btn btn-light btn-sm" onclick="copy1.unSelect()">Unselect</button>
+		<br>
+		<h5>2: Initalize the class</h5>
+		<textarea readonly style="width: 100%; height: 5.1em;"
+			class="mx-auto bg-dark text-light border border-primary rounded p-1" id="code2">
+&lt;script&gt;
+&Tab;const copy = new Clipboard(document.getElementById('myTextBox'));
+&lt;/script&gt;</textarea>
+		<br>
+		<button class="btn btn-success btn-sm" onclick="copy2.copy()">Copy</button>&nbsp;
+		<button class="btn btn-info btn-sm" onclick="copy2.select()">Select All</button>&nbsp;
+		<button class="btn btn-light btn-sm" onclick="copy2.unSelect()">Unselect</button>
+		<br>
+		<h5>3: Add buttons</h5>
+		<textarea readonly style="width: 100%; height: 5.1em;"
+			class="mx-auto bg-dark text-light border border-primary rounded p-1" id="code3">
+&lt;button onclick="copy.copy()"&gt;Copy&lt;/button&gt;
+&lt;button onclick="copy.select()"&gt;Select All&lt;/button&gt;
+&lt;button onclick="copy.unSelect()"&gt;Unselect&lt;/button&gt;</textarea>
+		<br>
+		<button class="btn btn-success btn-sm" onclick="copy3.copy()">Copy</button>&nbsp;
+		<button class="btn btn-info btn-sm" onclick="copy3.select()">Select All</button>&nbsp;
+		<button class="btn btn-light btn-sm" onclick="copy3.unSelect()">Unselect</button>
+		<br>
+		<h2>Features:</h2>
+		<textarea readonly style="width: 100%; height: 15em;"
+			class="mx-auto bg-dark text-light border border-primary rounded p-1">
+object getSelection() // returns the selection in an object ({ start: [start], end: [end]})
+void setSelection(int, int), setSelection(object) // sets the selection from the start and the end or an object returned by getSelection()
+void select() // selects all
+void unSelect // unselects all
+bool isSelected() // returns true if atleast 1 character is selected
+bool isAllSelected() // returns true if all text is selected
+void copy(bool) // if the first argument is true, just copies. if it is false, it selects all, copies and reverts to the old selection (doesn't work on buttons)</textarea>
+	</div>
+	<script>
+		const code1 = document.getElementById("code1"), code2 = document.getElementById("code2"), code3 = document.getElementById("code3");
+		const copy1 = new Clipboard(code1), copy2 = new Clipboard(code2), copy3 = new Clipboard(code3);
+	</script>
+</body>
+
+</html>

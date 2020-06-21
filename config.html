@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/config.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script src="/scripts/config.js" defer></script>
+	<title>Configuration Generator for alibot-mc</title>
+</head>
+
+<body>
+	<div class="mx-auto mt-3 root">
+		<h1>Configuration Generator for
+			<a href="http://github.com/uAliFurkanY/alibot-mc">alibot-mc</a>.
+		</h1>
+		<h6>MODE:
+			<a id="mode" href="#">JSON</a> (click to change)
+		</h6>
+		<form id="config_form">
+			Server to connect to:
+			<input name="host" placeholder="Enter server here..." value="0b0t.org" class="form-control" required><br>
+			MC account email (or username for cracked):
+			<input name="username" placeholder="Enter username here..." class="form-control" required><br>
+			MC account password (leave blank if cracked):
+			<input name="password" placeholder="Enter password here..." type="password" class="form-control"
+				required><br>
+				Select mode:
+				<br>
+				<input name="mode" id="m_public" value="public" type="radio" checked required>
+				<label for="m_public">Public</label>
+				<br>
+				<input name="mode" id="m_private" value="private" type="radio" required>
+				<label for="m_private">Private</label>
+				<br>
+				Select delays:
+				<br>
+				<input name="delays" id="d0" value="0" type="radio" checked required>
+				<label for="d0">Loading...</label>
+				<br>
+				<input name="delays" id="d1" value="1" type="radio" required>
+				<label for="d1">Loading...</label>
+				<br>
+				<input name="delays" id="d2" value="2" type="radio" required>
+				<label for="d2">Loading...</label>
+				<br>
+				<input name="delays" id="d3" value="3" type="radio" required>
+				<label for="d3">Loading...</label>
+				<br>
+				<input name="delays" id="d4" value="4" type="radio" required>
+				<label for="d4">Loading...</label>
+			<br>
+			List of operators: (splitted with a comma. (','))
+			<input name="op" placeholder="Enter operators here..." class="form-control" required><br>
+			Remote Control Settings: (ADVANCED, leave blank if not needed) (Listening details, not connection)
+			<br>
+			<input name="remote" id="remote" type="checkbox" value="true">
+			<label for="remote">Remote Control</label>
+			<br>
+			Remote Server Port:
+			<input name="tcp_port" placeholder="Enter port here..." value="26354" type="number" min="1" max="65535"
+				class="form-control"><br>
+			Remote Server IP:
+			<input name="tcp_host" placeholder="Enter host here..." value="localhost" class="form-control"><br>
+			<button type="submit" class="form-control bg-primary text-white">Generate</button>
+		</form>
+		<br>
+		<button class="btn btn-primary btns" onclick="copy()">Copy</button>&nbsp;
+		<button class="btn btn-info btns" onclick="select()">Select All</button>&nbsp;
+		<button class="btn btn-light btns" onclick="unSelect()">Unselect All</button>
+		<br>
+		<br>
+		<textarea id="output" placeholder="Output goes here..." readonly></textarea>
+	</div>
+</body>
+
+</html>
