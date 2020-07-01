@@ -3,6 +3,8 @@ let loginForm = document.querySelector("form#login");
 let msgForm = document.querySelector("form#msg");
 let chatDiv = document.querySelector("div#chat");
 
+let ws;
+
 loginForm.url.value = server;
 
 function escapeHtml(string) {
@@ -35,8 +37,7 @@ loginForm.onsubmit = e => {
     e.preventDefault();
     let name = loginForm.name.value;
     server = loginForm.url.value;
-    let ws = getWs(() => ws.send(name));
-
+    ws = getWs(() => ws.send(name));
 }
 msgForm.onsubmit = e => {
     e.preventDefault();
