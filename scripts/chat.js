@@ -1,8 +1,5 @@
 let server = location.hash.substr(1);
 if (!server) {
-    const request = new XMLHttpRequest();
-    request.open('GET', '/port', false);  // `false` makes the request synchronous
-    request.send(null);
     server = "wss://ws-chat-server.glitch.me"; // default server
 }
 let ws;
@@ -52,10 +49,7 @@ loginForm.onsubmit = e => {
     e.preventDefault();
     let name = loginForm.name.value;
     server = loginForm.url.value;
-    ws = getWs(() => {
-        send(name);
-        send("VERSION");
-    });
+    ws = getWs(() => send(name));
 }
 msgForm.onsubmit = e => {
     e.preventDefault();
