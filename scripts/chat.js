@@ -3,7 +3,7 @@ if (!server) {
     const request = new XMLHttpRequest();
     request.open('GET', '/port', false);  // `false` makes the request synchronous
     request.send(null);
-    server = (location.protocol === "https:" ? "wss://" : "ws://") + location.hostname + ":" + (+request.response || 4565);
+    server = "wss://ws-chat-server.glitch.me"; // default server
 }
 let ws;
 
